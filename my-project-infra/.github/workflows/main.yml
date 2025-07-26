@@ -15,19 +15,19 @@
           - name: Checkout my-project-infra repository
             uses: actions/checkout@v4
             with:
-              repository: bhumikapandey1992/my-project-infra # Specify the infra repo
+              repository: BSChathuranga/Full_Stack_AWS/my-project-infra # Specify the infra repo
               path: my-project-infra # Checkout into a specific path
 
           - name: Checkout my-frontend-app repository
             uses: actions/checkout@v4
             with:
-              repository: bhumikapandey1992/my-frontend-app # Specify the frontend repo
+              repository: BSChathuranga/Full_Stack_AWS/frontend # Specify the frontend repo
               path: my-frontend-app # Checkout into a specific path
 
           - name: Checkout my-backend-app repository
             uses: actions/checkout@v4
             with:
-              repository: bhumikapandey1992/my-backend-app # Specify the backend repo
+              repository: BSChathuranga/Full_Stack_AWS/backend # Specify the backend repo
               path: my-backend-app # Checkout into a specific path
 
           - name: Configure AWS credentials
