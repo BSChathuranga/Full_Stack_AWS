@@ -1,0 +1,48 @@
+# Dockerfile for Python Application
+FROM python:3.11-slim-bookworm AS Build
+
+
+
+# Stage 1: Install dependencies and build the application
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONTWRITEBYTECODE=1
+
+# Set working directory inside the container
+WORKDIR /app
+
+# install dependencies required for mysql client and other builds tools
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    pkg-config  \
+    libmariadb-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy requirements file and install dependencies
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+#  Stage 2: Crate Final Image
+FROM python:3.11-slim-bookworm
+
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy the installed dependencies from the build stage to the final image
+COPY --from=build /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=build /usr/local/bin /usr/local/bin
+
+# Copy the application code into the container
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Command to run the django application using gunicorn
+CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0:8000", "--timeout", "300", "--workers", "3"]
+
+  
