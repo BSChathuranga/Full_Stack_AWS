@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: 370919050943.dkr.ecr.Mumbai ap-south-1.amazonaws.com/my-frontend-app:latest
+    image: 370919050943.dkr.ecr.ap-south-1.amazonaws.com/my-frontend-app:latest
     ports:
       - "80:80"
     restart: always
@@ -10,7 +10,7 @@ services:
       - REACT_APP_BACKEND_URL=http://3.110.101.59:8000/api/
 
   backend:
-    image: 370919050943.dkr.ecr.Mumbai ap-south-1.amazonaws.com/my-backend-app:latest
+    image: 370919050943.dkr.ecr.ap-south-1.amazonaws.com/my-backend-app:latest
 
     ports:
       - "8000:8000"
